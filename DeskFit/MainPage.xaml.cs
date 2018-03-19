@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,44 @@ namespace DeskFit
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        DispatcherTimer timer;
+
+        TimeSpan breakTime = new TimeSpan(0, 0, 5);
+
+        TimeSpan timeLeft;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            timeLeft = breakTime;
+
+            timer = new DispatcherTimer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+        }
+        
+        private void Timer_Tick(object sender, object e)
+        {
+            timeLeft = timeLeft.Subtract(new TimeSpan(0, 0, 1));
+            header.Text = timeLeft.ToString(@"mm\:ss");
+
+            if (timeLeft <= new TimeSpan(0, 0, 0))
+            {
+                Debug.WriteLine("Time is Up!");
+                //mainGrid.Background = Application.Current.Resources["ApplicationPageBackgroundThemeBrush"] as Brush;
+                timer.Stop();
+            }
+        }
+
+        private void mainGrid_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                Debug.WriteLine("Press");
+            }
         }
     }
 }
