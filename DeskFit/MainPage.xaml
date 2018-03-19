@@ -7,12 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" KeyUp="mainGrid_KeyUp">
+    <Page.Resources>
+        <SolidColorBrush x:Key="DangerRed" Color="Red"></SolidColorBrush>
+        <SolidColorBrush x:Key="ExerciseBlue" Color="Blue"></SolidColorBrush>
+    </Page.Resources>
+
+    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="50,0,50,0">
-            <TextBlock x:Name="subHeader" Text="Time to Next Break" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="header" Text="6:15" FontSize="72" HorizontalAlignment="Center"/>
-            <ProgressBar x:Name="progress" Value="50" Height="10" Margin="0,20,0,0"/>
-            <Button x:Name="actionButton" HorizontalAlignment="Center" Margin="0,20,0,0" Content="Break Now" FontSize="20" Padding="32,16,32,16" />
+            <TextBlock x:Name="SubHeader" Text="Time to Next Break" FontSize="24" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="Header" Text="0:00" FontSize="72" HorizontalAlignment="Center"/>
+            <ProgressBar x:Name="Progress" Value="100" Height="10" Margin="0,20,0,0" Foreground="White"/>
+            <Button x:Name="ActionButton" HorizontalAlignment="Center" Margin="0,20,0,0" Content="Break Now" FontSize="20" Padding="32,16,32,16" Click="ActionButton_Click" />
         </StackPanel>
     </Grid>
 </Page>
